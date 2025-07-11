@@ -9,7 +9,7 @@ export type Attempt = string[];
 type Puzzle = [Attempt, Attempt, Attempt, Attempt, Attempt, Attempt];
 type AttemptIndex = 0 | 1 | 2 | 3 | 4 | 5;
 
-export default function Puzzle() {
+export default function Puzzle({ solution }: { solution: string }) {
 	const [puzzle, setPuzzle] = useState<Puzzle>([[], [], [], [], [], []]);
 	const [attemptIndex, setAttemptIndex] = useState<AttemptIndex>(0);
 
