@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import AttemptRow from "~/app/components/AttemptRow";
 import Keyboard from "~/app/components/Keyboard";
+import {keysOfInterest} from "~/app/components/keysOfInterest";
 
 export type Attempt = string[];
 type Puzzle = [Attempt, Attempt, Attempt, Attempt, Attempt, Attempt];
@@ -18,7 +19,11 @@ export default function Puzzle() {
 
 			if (currentAttempt.length > 0 && key === "BACKSPACE") {
 				currentAttempt = currentAttempt.slice(0, -1);
-			} else if (currentAttempt.length < 5 && key !== "BACKSPACE") {
+			} else if (
+				currentAttempt.length < 5 &&
+				keysOfInterest.includes(key) &&
+				key !== "BACKSPACE"
+			) {
 				currentAttempt = [...currentAttempt, key];
 			}
 
