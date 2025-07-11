@@ -1,6 +1,5 @@
-import AttemptGrid from "~/app/components/AttemptGrid";
 import Instructions from "~/app/components/Instructions";
-import Keyboard from "~/app/components/Keyboard";
+import Puzzle from "~/app/components/Puzzle";
 
 export default function HomePage() {
 	return (
@@ -9,8 +8,7 @@ export default function HomePage() {
 				Sanamestari
 			</h1>
 			<Instructions />
-			<AttemptGrid />
-			<Keyboard />
+			<Puzzle />
 		</main>
 	);
 }

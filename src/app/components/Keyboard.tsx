@@ -1,43 +1,47 @@
-﻿import CharacterButton from "~/app/components/CharacterButton";
+import CharacterButton from "~/app/components/CharacterButton";
 
-export default function Keyboard() {
+export default function Keyboard({
+	onKeyPress,
+}: {
+	onKeyPress: (key: string) => void;
+}) {
 	return (
 		<div className="col-span-full">
 			<div className="flex grow gap-0.5">
-				<CharacterButton character="Q" />
-				<CharacterButton character="W" />
-				<CharacterButton character="E" />
-				<CharacterButton character="R" />
-				<CharacterButton character="T" />
-				<CharacterButton character="Y" />
-				<CharacterButton character="U" />
-				<CharacterButton character="I" />
-				<CharacterButton character="O" />
-				<CharacterButton character="P" />
-				<CharacterButton character="Å" />
+				<CharacterButton character="Q" onClick={onKeyPress} />
+				<CharacterButton character="W" onClick={onKeyPress} />
+				<CharacterButton character="E" onClick={onKeyPress} />
+				<CharacterButton character="R" onClick={onKeyPress} />
+				<CharacterButton character="T" onClick={onKeyPress} />
+				<CharacterButton character="Y" onClick={onKeyPress} />
+				<CharacterButton character="U" onClick={onKeyPress} />
+				<CharacterButton character="I" onClick={onKeyPress} />
+				<CharacterButton character="O" onClick={onKeyPress} />
+				<CharacterButton character="P" onClick={onKeyPress} />
+				<CharacterButton character="Å" onClick={onKeyPress} />
 			</div>
 			<div className="flex grow gap-0.5">
-				<CharacterButton character="A" />
-				<CharacterButton character="S" />
-				<CharacterButton character="D" />
-				<CharacterButton character="F" />
-				<CharacterButton character="G" />
-				<CharacterButton character="H" />
-				<CharacterButton character="J" />
-				<CharacterButton character="K" />
-				<CharacterButton character="L" />
-				<CharacterButton character="Ö" />
-				<CharacterButton character="Ä" />
+				<CharacterButton character="A" onClick={onKeyPress} />
+				<CharacterButton character="S" onClick={onKeyPress} />
+				<CharacterButton character="D" onClick={onKeyPress} />
+				<CharacterButton character="F" onClick={onKeyPress} />
+				<CharacterButton character="G" onClick={onKeyPress} />
+				<CharacterButton character="H" onClick={onKeyPress} />
+				<CharacterButton character="J" onClick={onKeyPress} />
+				<CharacterButton character="K" onClick={onKeyPress} />
+				<CharacterButton character="L" onClick={onKeyPress} />
+				<CharacterButton character="Ö" onClick={onKeyPress} />
+				<CharacterButton character="Ä" onClick={onKeyPress} />
 			</div>
 			<div className="flex grow">
 				<div className="flex gap-0.5">
-					<CharacterButton character="Z" />
-					<CharacterButton character="X" />
-					<CharacterButton character="C" />
-					<CharacterButton character="V" />
-					<CharacterButton character="B" />
-					<CharacterButton character="N" />
-					<CharacterButton character="M" />
+					<CharacterButton character="Z" onClick={onKeyPress} />
+					<CharacterButton character="X" onClick={onKeyPress} />
+					<CharacterButton character="C" onClick={onKeyPress} />
+					<CharacterButton character="V" onClick={onKeyPress} />
+					<CharacterButton character="B" onClick={onKeyPress} />
+					<CharacterButton character="N" onClick={onKeyPress} />
+					<CharacterButton character="M" onClick={onKeyPress} />
 				</div>
 				<div className="ml-auto">
 					<button
