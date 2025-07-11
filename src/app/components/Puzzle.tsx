@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import AttemptRow from "~/app/components/AttemptRow";
 import Keyboard from "~/app/components/Keyboard";
 
@@ -12,21 +12,40 @@ export default function Puzzle() {
 	const [puzzle, setPuzzle] = useState<Puzzle>([[], [], [], [], [], []]);
 	const [attemptIndex, setAttemptIndex] = useState<AttemptIndex>(0);
 
-	function onKeyPress(key: string) {
-		let currentAttempt = puzzle[attemptIndex];
+	const onKeyPress = useCallback(
+		(key: string) => {
+			let currentAttempt = puzzle[attemptIndex];
 
-		if (currentAttempt.length < 5) {
-			currentAttempt = [...currentAttempt, key];
-			setPuzzle((prevPuzzle) => {
-				return prevPuzzle.map((attempt, index) => {
-					if (index === attemptIndex) {
-						return [...currentAttempt];
-					}
-					return attempt;
-				}) as Puzzle;
-			});
-		}
-	}
+			if (currentAttempt.length < 5) {
+				currentAttempt = [...currentAttempt, key];
+				setPuzzle((prevPuzzle) => {
+					return prevPuzzle.map((attempt, index) => {
+						if (index === attemptIndex) {
+							return [...currentAttempt];
+						}
+						return attempt;
+					}) as Puzzle;
+				});
+			}
+		},
+		[attemptIndex, puzzle[attemptIndex]],
+	);
+
+	useEffect(() => {
+		const onKeyDown = (event: KeyboardEvent) => {
+			const key = event.key.toUpperCase();
+
+			if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) {
+				return;
+			}
+
+			onKeyPress(key);
+		};
+
+		window.addEventListener("keydown", onKeyDown);
+
+		return () => window.removeEventListener("keydown", onKeyDown);
+	}, [onKeyPress]);
 
 	return (
 		<>
