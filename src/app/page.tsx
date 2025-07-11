@@ -8,7 +8,7 @@ export default function HomePage() {
 			<h1 className="font-extrabold text-xl tracking-tight sm:text-[4rem]">
 				Sanamestari
 			</h1>
-			<div className="container flex flex-col items-center gap-4 px-6">
+			<div className="flex flex-col items-center gap-4 px-6">
 				<Instructions />
 				<AttemptGrid />
 			</div>
