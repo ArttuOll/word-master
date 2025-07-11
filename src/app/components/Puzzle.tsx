@@ -16,17 +16,20 @@ export default function Puzzle() {
 		(key: string) => {
 			let currentAttempt = puzzle[attemptIndex];
 
-			if (currentAttempt.length < 5) {
+			if (currentAttempt.length > 0 && key === "BACKSPACE") {
+				currentAttempt = currentAttempt.slice(0, -1);
+			} else if (currentAttempt.length < 5 && key !== "BACKSPACE") {
 				currentAttempt = [...currentAttempt, key];
-				setPuzzle((prevPuzzle) => {
-					return prevPuzzle.map((attempt, index) => {
-						if (index === attemptIndex) {
-							return [...currentAttempt];
-						}
-						return attempt;
-					}) as Puzzle;
-				});
 			}
+
+			setPuzzle((prevPuzzle) => {
+				return prevPuzzle.map((attempt, index) => {
+					if (index === attemptIndex) {
+						return [...currentAttempt];
+					}
+					return attempt;
+				}) as Puzzle;
+			});
 		},
 		[attemptIndex, puzzle[attemptIndex]],
 	);
