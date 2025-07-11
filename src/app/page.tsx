@@ -4,14 +4,12 @@ import Keyboard from "~/app/components/Keyboard";
 
 export default function HomePage() {
 	return (
-		<main className="flex min-h-screen flex-col items-center justify-between bg-neutral-50">
-			<h1 className="font-extrabold text-xl tracking-tight sm:text-[4rem]">
+		<main className="grid min-h-screen grid-cols-[1fr_min-content_1fr] items-center justify-items-center gap-y-2 bg-neutral-50">
+			<h1 className="col-2 font-extrabold text-xl tracking-tight sm:text-[4rem]">
 				Sanamestari
 			</h1>
-			<div className="flex flex-col items-center gap-4 px-6">
-				<Instructions />
-				<AttemptGrid />
-			</div>
+			<Instructions />
+			<AttemptGrid />
 			<Keyboard />
 		</main>
 	);

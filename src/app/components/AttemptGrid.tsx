@@ -2,7 +2,7 @@
 
 export default function AttemptGrid() {
 	return (
-		<ul className="flex list-none flex-col gap-2">
+		<ul className="col-2 flex list-none flex-col gap-2">
 			<AttemptRow />
 			<AttemptRow />
 			<AttemptRow />

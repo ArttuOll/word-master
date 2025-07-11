@@ -2,7 +2,7 @@
 
 export default function Keyboard() {
 	return (
-		<div>
+		<div className="col-span-full">
 			<div className="flex grow gap-0.5">
 				<CharacterButton character="Q" />
 				<CharacterButton character="W" />

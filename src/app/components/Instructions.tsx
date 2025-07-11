@@ -10,10 +10,10 @@ export default function Instructions() {
 	}, []);
 
 	return (
-		<>
+		<div className="col-2 flex w-full flex-col items-center gap-2">
 			<h2 className="font-bold text-md">Arvaa, mikä sana on kyseessä!</h2>
 			<details
-				className="w-full"
+				className="w-full self-start"
 				open={open}
 				onClick={() => setOpen(!open)}
 				onKeyDown={() => setOpen(!open)}
@@ -52,6 +52,6 @@ export default function Instructions() {
 					</li>
 				</ul>
 			</details>
-		</>
+		</div>
 	);
 }
