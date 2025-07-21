@@ -15,7 +15,6 @@ export default function Instructions() {
 			<details
 				className="w-full self-start"
 				open={open}
-				onClick={() => setOpen(!open)}
 				onKeyDown={() => setOpen(!open)}
 			>
 				<summary className="flex cursor-pointer list-none gap-1">
