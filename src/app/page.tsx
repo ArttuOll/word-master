@@ -10,8 +10,8 @@ export default async function HomePage() {
 	});
 
 	return (
-		<main className="grid min-h-screen grid-cols-[1fr_min-content_1fr] items-center justify-items-center gap-y-2 bg-neutral-50">
-			<h1 className="col-2 font-extrabold text-xl tracking-tight sm:text-[4rem]">
+		<main className="flex min-h-screen w-full flex-col items-center justify-between gap-y-2 bg-neutral-50">
+			<h1 className="col-2 font-extrabold text-[3rem] tracking-tight">
 				Sanamestari
 			</h1>
 			<Instructions />
