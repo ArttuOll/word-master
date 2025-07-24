@@ -4,10 +4,12 @@ export default function CharacterBox({
 	character,
 	ref,
 	onChange,
+	disabled,
 }: {
 	character: string;
 	ref: Ref<HTMLInputElement>;
 	onChange: (newValue: string) => void;
+	disabled: boolean;
 }) {
 	function handleChange(event: ChangeEvent<HTMLInputElement>) {
 		onChange(event.target.value.toUpperCase());
@@ -15,6 +17,7 @@ export default function CharacterBox({
 
 	return (
 		<input
+			disabled={disabled}
 			type="text"
 			value={character}
 			ref={ref}

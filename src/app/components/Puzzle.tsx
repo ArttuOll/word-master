@@ -30,12 +30,36 @@ export default function Puzzle({ solution }: { solution: string }) {
 	return (
 		<div className="grid w-full grid-cols-[1fr_min-content_1fr] items-center justify-items-center gap-y-4">
 			<ul className="col-2 flex list-none flex-col gap-2">
-				<AttemptRow characters={puzzle[0]} updatePuzzle={updatePuzzle} />
-				<AttemptRow characters={puzzle[1]} updatePuzzle={updatePuzzle} />
-				<AttemptRow characters={puzzle[2]} updatePuzzle={updatePuzzle} />
-				<AttemptRow characters={puzzle[3]} updatePuzzle={updatePuzzle} />
-				<AttemptRow characters={puzzle[4]} updatePuzzle={updatePuzzle} />
-				<AttemptRow characters={puzzle[5]} updatePuzzle={updatePuzzle} />
+				<AttemptRow
+					characters={puzzle[0]}
+					updatePuzzle={updatePuzzle}
+					disabled={attemptIndex !== 0}
+				/>
+				<AttemptRow
+					characters={puzzle[1]}
+					updatePuzzle={updatePuzzle}
+					disabled={attemptIndex !== 1}
+				/>
+				<AttemptRow
+					characters={puzzle[2]}
+					updatePuzzle={updatePuzzle}
+					disabled={attemptIndex !== 2}
+				/>
+				<AttemptRow
+					characters={puzzle[3]}
+					updatePuzzle={updatePuzzle}
+					disabled={attemptIndex !== 3}
+				/>
+				<AttemptRow
+					characters={puzzle[4]}
+					updatePuzzle={updatePuzzle}
+					disabled={attemptIndex !== 4}
+				/>
+				<AttemptRow
+					characters={puzzle[5]}
+					updatePuzzle={updatePuzzle}
+					disabled={attemptIndex !== 5}
+				/>
 			</ul>
 			<button
 				type="button"

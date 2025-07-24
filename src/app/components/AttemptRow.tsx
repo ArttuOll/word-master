@@ -5,9 +5,11 @@ import type { Attempt } from "~/app/components/Puzzle";
 export default function AttemptRow({
 	characters,
 	updatePuzzle,
+	disabled,
 }: {
 	characters: Attempt;
 	updatePuzzle: (attempt: Attempt) => void;
+	disabled: boolean;
 }) {
 	const refs = useRef<HTMLInputElement[]>([]);
 
@@ -39,6 +41,7 @@ export default function AttemptRow({
 						}
 					}}
 					onChange={onChange(0)}
+					disabled={disabled}
 				/>
 				<CharacterBox
 					character={characters?.[1] ?? ""}
@@ -48,6 +51,7 @@ export default function AttemptRow({
 						}
 					}}
 					onChange={onChange(1)}
+					disabled={disabled}
 				/>
 				<CharacterBox
 					character={characters?.[2] ?? ""}
@@ -57,6 +61,7 @@ export default function AttemptRow({
 						}
 					}}
 					onChange={onChange(2)}
+					disabled={disabled}
 				/>
 				<CharacterBox
 					character={characters?.[3] ?? ""}
@@ -66,6 +71,7 @@ export default function AttemptRow({
 						}
 					}}
 					onChange={onChange(3)}
+					disabled={disabled}
 				/>
 				<CharacterBox
 					character={characters?.[4] ?? ""}
@@ -75,6 +81,7 @@ export default function AttemptRow({
 						}
 					}}
 					onChange={onChange(4)}
+					disabled={disabled}
 				/>
 			</ul>
 		</li>
