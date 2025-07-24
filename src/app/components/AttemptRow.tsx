@@ -6,10 +6,12 @@ export default function AttemptRow({
 	characters,
 	updatePuzzle,
 	disabled,
+	index,
 }: {
 	characters: Attempt;
 	updatePuzzle: (attempt: Attempt) => void;
 	disabled: boolean;
+	index: number;
 }) {
 	const refs = useRef<HTMLInputElement[]>([]);
 
@@ -17,15 +19,26 @@ export default function AttemptRow({
 		(index: number) => (newValue: string) => {
 			let currentAttempt = characters;
 
-			if (currentAttempt.length > 0 && newValue === "") {
-				currentAttempt = currentAttempt.slice(0, -1);
-				refs.current[index - 1]?.focus();
-			} else if (currentAttempt.length < 5) {
+			if (currentAttempt.length < 5) {
 				currentAttempt = [...currentAttempt, newValue];
-				refs.current[index + 1]?.focus();
-			}
 
-			updatePuzzle(currentAttempt);
+				refs.current[index + 1]?.focus();
+				updatePuzzle(currentAttempt);
+			}
+		},
+		[updatePuzzle, characters],
+	);
+
+	const onKeyDown = useCallback(
+		(index: number) => (key: string) => {
+			let currentAttempt = characters;
+
+			if (currentAttempt.length > 0 && key === "Backspace") {
+				currentAttempt = currentAttempt.slice(0, -1);
+
+				refs.current[index - 1]?.focus();
+				updatePuzzle(currentAttempt);
+			}
 		},
 		[updatePuzzle, characters],
 	);
@@ -42,6 +55,9 @@ export default function AttemptRow({
 					}}
 					onChange={onChange(0)}
 					disabled={disabled}
+					characterIndex={0}
+					attemptIndex={index}
+					onKeyDown={onKeyDown(0)}
 				/>
 				<CharacterBox
 					character={characters?.[1] ?? ""}
@@ -52,6 +68,9 @@ export default function AttemptRow({
 					}}
 					onChange={onChange(1)}
 					disabled={disabled}
+					characterIndex={1}
+					attemptIndex={index}
+					onKeyDown={onKeyDown(1)}
 				/>
 				<CharacterBox
 					character={characters?.[2] ?? ""}
@@ -62,6 +81,9 @@ export default function AttemptRow({
 					}}
 					onChange={onChange(2)}
 					disabled={disabled}
+					characterIndex={2}
+					attemptIndex={index}
+					onKeyDown={onKeyDown(2)}
 				/>
 				<CharacterBox
 					character={characters?.[3] ?? ""}
@@ -72,6 +94,9 @@ export default function AttemptRow({
 					}}
 					onChange={onChange(3)}
 					disabled={disabled}
+					characterIndex={3}
+					attemptIndex={index}
+					onKeyDown={onKeyDown(3)}
 				/>
 				<CharacterBox
 					character={characters?.[4] ?? ""}
@@ -82,6 +107,9 @@ export default function AttemptRow({
 					}}
 					onChange={onChange(4)}
 					disabled={disabled}
+					characterIndex={4}
+					attemptIndex={index}
+					onKeyDown={onKeyDown(4)}
 				/>
 			</ul>
 		</li>

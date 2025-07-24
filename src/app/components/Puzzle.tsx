@@ -34,31 +34,37 @@ export default function Puzzle({ solution }: { solution: string }) {
 					characters={puzzle[0]}
 					updatePuzzle={updatePuzzle}
 					disabled={attemptIndex !== 0}
+					index={0}
 				/>
 				<AttemptRow
 					characters={puzzle[1]}
 					updatePuzzle={updatePuzzle}
 					disabled={attemptIndex !== 1}
+					index={1}
 				/>
 				<AttemptRow
 					characters={puzzle[2]}
 					updatePuzzle={updatePuzzle}
 					disabled={attemptIndex !== 2}
+					index={2}
 				/>
 				<AttemptRow
 					characters={puzzle[3]}
 					updatePuzzle={updatePuzzle}
 					disabled={attemptIndex !== 3}
+					index={3}
 				/>
 				<AttemptRow
 					characters={puzzle[4]}
 					updatePuzzle={updatePuzzle}
 					disabled={attemptIndex !== 4}
+					index={4}
 				/>
 				<AttemptRow
 					characters={puzzle[5]}
 					updatePuzzle={updatePuzzle}
 					disabled={attemptIndex !== 5}
+					index={5}
 				/>
 			</ul>
 			<button
