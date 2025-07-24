@@ -1,69 +1,41 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import AttemptRow from "~/app/components/AttemptRow";
-import Keyboard from "~/app/components/Keyboard";
-import { keysOfInterest } from "~/app/components/keysOfInterest";
 
 export type Attempt = string[];
-type Puzzle = [Attempt, Attempt, Attempt, Attempt, Attempt, Attempt];
-type AttemptIndex = 0 | 1 | 2 | 3 | 4 | 5;
+export type Puzzle = [Attempt, Attempt, Attempt, Attempt, Attempt, Attempt];
+export type AttemptIndex = 0 | 1 | 2 | 3 | 4 | 5;
 
 export default function Puzzle({ solution }: { solution: string }) {
 	const [puzzle, setPuzzle] = useState<Puzzle>([[], [], [], [], [], []]);
 	const [attemptIndex, setAttemptIndex] = useState<AttemptIndex>(0);
 
-	const onKeyPress = useCallback(
-		(key: string) => {
-			let currentAttempt = puzzle[attemptIndex];
+	const updatePuzzle = useCallback(
+		(newAttempt: Attempt) => {
+			setPuzzle(
+				(prevPuzzle) =>
+					prevPuzzle.map((attempt, index) => {
+						if (index === attemptIndex) {
+							return [...newAttempt];
+						}
 
-			if (currentAttempt.length > 0 && key === "BACKSPACE") {
-				currentAttempt = currentAttempt.slice(0, -1);
-			} else if (
-				currentAttempt.length < 5 &&
-				keysOfInterest.includes(key) &&
-				key !== "BACKSPACE"
-			) {
-				currentAttempt = [...currentAttempt, key];
-			}
-
-			setPuzzle((prevPuzzle) => {
-				return prevPuzzle.map((attempt, index) => {
-					if (index === attemptIndex) {
-						return [...currentAttempt];
-					}
-					return attempt;
-				}) as Puzzle;
-			});
+						return attempt;
+					}) as Puzzle,
+			);
 		},
-		[attemptIndex, puzzle[attemptIndex]],
+		[attemptIndex],
 	);
-
-	useEffect(() => {
-		const onKeyDown = (event: KeyboardEvent) => {
-			const key = event.key.toUpperCase();
-
-			if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) {
-				return;
-			}
-
-			onKeyPress(key);
-		};
-
-		window.addEventListener("keydown", onKeyDown);
-
-		return () => window.removeEventListener("keydown", onKeyDown);
-	}, [onKeyPress]);
 
 	return (
 		<div className="grid w-full grid-cols-[1fr_min-content_1fr] items-center justify-items-center gap-y-4">
 			<ul className="col-2 flex list-none flex-col gap-2">
-				<AttemptRow characters={puzzle[0]} />
-				<AttemptRow characters={puzzle[1]} />
-				<AttemptRow characters={puzzle[2]} />
-				<AttemptRow characters={puzzle[3]} />
-				<AttemptRow characters={puzzle[4]} />
-				<AttemptRow characters={puzzle[5]} />
+				<AttemptRow characters={puzzle[0]} updatePuzzle={updatePuzzle} />
+				<AttemptRow characters={puzzle[1]} updatePuzzle={updatePuzzle} />
+				<AttemptRow characters={puzzle[2]} updatePuzzle={updatePuzzle} />
+				<AttemptRow characters={puzzle[3]} updatePuzzle={updatePuzzle} />
+				<AttemptRow characters={puzzle[4]} updatePuzzle={updatePuzzle} />
+				<AttemptRow characters={puzzle[5]} updatePuzzle={updatePuzzle} />
 			</ul>
 			<button
 				type="button"
@@ -71,7 +43,6 @@ export default function Puzzle({ solution }: { solution: string }) {
 			>
 				Tarkista
 			</button>
-			<Keyboard onKeyPress={onKeyPress} />
 		</div>
 	);
 }
