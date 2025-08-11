@@ -16,3 +16,10 @@ model Word {
 
   @@index([name])
 }
+
+model Solution {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  @@index([name])
+}

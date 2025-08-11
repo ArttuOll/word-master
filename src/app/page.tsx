@@ -3,8 +3,8 @@ import Puzzle from "~/app/components/Puzzle";
 import { db } from "~/server/db";
 
 export default async function HomePage() {
-	const wordCount = await db.word.count();
-	const solution = await db.word.findFirstOrThrow({
+	const wordCount = await db.solution.count();
+	const solution = await db.solution.findFirstOrThrow({
 		take: 1,
 		skip: Math.floor(Math.random() * wordCount),
 	});
