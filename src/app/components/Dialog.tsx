@@ -16,7 +16,11 @@ export default function Dialog({
 			<div className="flex flex-col items-center justify-items-center gap-4 ">
 				<p className="text-xl">{children}</p>
 				<div className="flex w-full justify-center gap-4">
-					<WordMasterButton type="button" autoFocus>
+					<WordMasterButton
+						type="button"
+						autoFocus
+						onClick={() => window.location.reload()}
+					>
 						Pelaa uudelleen
 					</WordMasterButton>
 				</div>

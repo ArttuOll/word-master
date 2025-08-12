@@ -1,7 +1,7 @@
 "use client";
 
-import {useCallback, useRef, useState} from "react";
-import {isFinnishWord} from "~/app/actions/isFinnishWord";
+import { useCallback, useRef, useState } from "react";
+import { isFinnishWord } from "~/app/actions/isFinnishWord";
 import AttemptRow from "~/app/components/AttemptRow";
 import Dialog from "~/app/components/Dialog";
 
