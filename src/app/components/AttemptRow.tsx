@@ -3,12 +3,12 @@ import CharacterBox from "~/app/components/CharacterBox";
 import type { Attempt } from "~/app/components/Puzzle";
 
 export default function AttemptRow({
-	characters,
+	attempt,
 	updatePuzzle,
 	disabled,
 	index,
 }: {
-	characters: Attempt;
+	attempt: Attempt;
 	updatePuzzle: (attempt: Attempt) => void;
 	disabled: boolean;
 	index: number;
@@ -17,21 +17,24 @@ export default function AttemptRow({
 
 	const onChange = useCallback(
 		(index: number) => (newValue: string) => {
-			let currentAttempt = characters;
+			let currentAttempt = attempt;
 
 			if (currentAttempt.length < 5) {
-				currentAttempt = [...currentAttempt, newValue];
+				currentAttempt = [
+					...currentAttempt,
+					{ character: newValue, color: "gray" },
+				];
 
 				refs.current[index + 1]?.focus();
 				updatePuzzle(currentAttempt);
 			}
 		},
-		[updatePuzzle, characters],
+		[updatePuzzle, attempt],
 	);
 
 	const onKeyDown = useCallback(
 		(index: number) => (key: string) => {
-			let currentAttempt = characters;
+			let currentAttempt = attempt;
 
 			if (currentAttempt.length > 0 && key === "Backspace") {
 				currentAttempt = currentAttempt.slice(0, -1);
@@ -40,14 +43,14 @@ export default function AttemptRow({
 				updatePuzzle(currentAttempt);
 			}
 		},
-		[updatePuzzle, characters],
+		[updatePuzzle, attempt],
 	);
 
 	return (
 		<li className="list-none">
 			<ul className="flex gap-1">
 				<CharacterBox
-					character={characters?.[0] ?? ""}
+					character={attempt?.[0]?.character ?? ""}
 					ref={(component) => {
 						if (component != null) {
 							refs.current[0] = component;
@@ -58,9 +61,10 @@ export default function AttemptRow({
 					characterIndex={0}
 					attemptIndex={index}
 					onKeyDown={onKeyDown(0)}
+					color={attempt[0]?.color ?? "gray"}
 				/>
 				<CharacterBox
-					character={characters?.[1] ?? ""}
+					character={attempt?.[1]?.character ?? ""}
 					ref={(component) => {
 						if (component != null) {
 							refs.current[1] = component;
@@ -71,9 +75,10 @@ export default function AttemptRow({
 					characterIndex={1}
 					attemptIndex={index}
 					onKeyDown={onKeyDown(1)}
+					color={attempt[1]?.color ?? "gray"}
 				/>
 				<CharacterBox
-					character={characters?.[2] ?? ""}
+					character={attempt?.[2]?.character ?? ""}
 					ref={(component) => {
 						if (component != null) {
 							refs.current[2] = component;
@@ -84,9 +89,10 @@ export default function AttemptRow({
 					characterIndex={2}
 					attemptIndex={index}
 					onKeyDown={onKeyDown(2)}
+					color={attempt[2]?.color ?? "gray"}
 				/>
 				<CharacterBox
-					character={characters?.[3] ?? ""}
+					character={attempt?.[3]?.character ?? ""}
 					ref={(component) => {
 						if (component != null) {
 							refs.current[3] = component;
@@ -97,9 +103,10 @@ export default function AttemptRow({
 					characterIndex={3}
 					attemptIndex={index}
 					onKeyDown={onKeyDown(3)}
+					color={attempt[3]?.color ?? "gray"}
 				/>
 				<CharacterBox
-					character={characters?.[4] ?? ""}
+					character={attempt?.[4]?.character ?? ""}
 					ref={(component) => {
 						if (component != null) {
 							refs.current[4] = component;
@@ -110,6 +117,7 @@ export default function AttemptRow({
 					characterIndex={4}
 					attemptIndex={index}
 					onKeyDown={onKeyDown(4)}
+					color={attempt[4]?.color ?? "gray"}
 				/>
 			</ul>
 		</li>

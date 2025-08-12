@@ -1,4 +1,5 @@
 import type { ChangeEvent, KeyboardEvent, Ref } from "react";
+import type { Color } from "~/app/components/Puzzle";
 
 export default function CharacterBox({
 	character,
@@ -8,6 +9,7 @@ export default function CharacterBox({
 	attemptIndex,
 	characterIndex,
 	onKeyDown,
+	color,
 }: {
 	character: string;
 	ref: Ref<HTMLInputElement>;
@@ -16,6 +18,7 @@ export default function CharacterBox({
 	attemptIndex: number;
 	characterIndex: number;
 	onKeyDown: (key: string) => void;
+	color: Color;
 }) {
 	function handleChange(event: ChangeEvent<HTMLInputElement>) {
 		if (event.target.value.length > 0) {
@@ -27,6 +30,16 @@ export default function CharacterBox({
 		onKeyDown(event.key);
 	}
 
+	function getStatusColorClass() {
+		if (color === "green") {
+			return "bg-green-500";
+		}
+		if (color === "yellow") {
+			return "bg-yellow-500";
+		}
+		return "bg-white";
+	}
+
 	return (
 		<input
 			id={`${attemptIndex}-${characterIndex}`}
@@ -36,7 +49,7 @@ export default function CharacterBox({
 			type="text"
 			value={character}
 			ref={ref}
-			className="flex h-12 w-12 items-center justify-center rounded-md border border-neutral-300 bg-white text-center font-bold text-2xl text-neutral-900 shadow-md md:h-24 md:w-24"
+			className={`flex h-12 w-12 items-center justify-center rounded-md border border-neutral-300 ${getStatusColorClass()} text-center font-bold text-2xl text-neutral-900 shadow-md md:h-24 md:w-24`}
 			maxLength={1}
 			minLength={1}
 			required

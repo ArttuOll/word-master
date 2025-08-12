@@ -2,18 +2,8 @@
 
 import { db } from "~/server/db";
 
-export async function isFinnishWord(
-	_prevState: { error: string | null },
-	formData: FormData,
-) {
+export async function isFinnishWord(word: string) {
 	"use server";
-
-	let word = "";
-	formData.forEach((value, key) => {
-		if (key.startsWith("character")) {
-			word = word.concat(value.toString());
-		}
-	});
 
 	const exists = await db.word.findFirst({
 		where: {
@@ -21,13 +11,5 @@ export async function isFinnishWord(
 		},
 	});
 
-	if (exists == null) {
-		return {
-			error: `"${word}" ei ole suomenkielen sana.`,
-		};
-	}
-
-	return {
-		error: null,
-	};
+	return exists != null;
 }
