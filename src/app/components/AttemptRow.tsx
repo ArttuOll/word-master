@@ -17,7 +17,6 @@ export default function AttemptRow({
 
 	const onChange = useCallback(
 		(newValue: string, characterIndex: number) => {
-			console.log(newValue);
 			const currentAttempt = [...attempt];
 
 			currentAttempt[characterIndex] = {

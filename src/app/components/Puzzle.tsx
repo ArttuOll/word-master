@@ -145,7 +145,9 @@ export default function Puzzle({ solution }: { solution: string }) {
 				</WordMasterButton>
 			</div>
 			<Dialog ref={successDialogRef}>
-				{success ? "Onneksi olkoon! Voitit pelin!" : "Hävisit pelin."}
+				{success
+					? "Onneksi olkoon! Voitit pelin!"
+					: `Hävisit pelin. Oikea sana oli "${solution}".`}
 			</Dialog>
 		</form>
 	);
