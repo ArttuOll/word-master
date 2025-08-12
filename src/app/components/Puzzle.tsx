@@ -4,6 +4,7 @@ import { useCallback, useRef, useState } from "react";
 import { isFinnishWord } from "~/app/actions/isFinnishWord";
 import AttemptRow from "~/app/components/AttemptRow";
 import Dialog from "~/app/components/Dialog";
+import WordMasterButton from "~/app/components/WordMasterButton";
 
 export type Color = "green" | "yellow" | "gray" | "white";
 export type Attempt = { character: string; color: Color }[];
@@ -139,13 +140,9 @@ export default function Puzzle({ solution }: { solution: string }) {
 						index={5}
 					/>
 				</ul>
-				<button
-					type="submit"
-					className="col-2 block transform cursor-pointer rounded border-green-900 border-b-4 bg-green-600 p-4 font-bold text-white transition duration-200 ease-in-out hover:bg-green-800 focus:translate-y-0 focus:border-b-0 focus:bg-green-700"
-					disabled={submitButtonDisabled}
-				>
+				<WordMasterButton type="submit" disabled={submitButtonDisabled}>
 					Tarkista
-				</button>
+				</WordMasterButton>
 			</div>
 			<Dialog ref={successDialogRef}>
 				{success ? "Onneksi olkoon! Voitit pelin!" : "Hävisit pelin."}

@@ -10,7 +10,7 @@ export default async function HomePage() {
 	});
 
 	return (
-		<main className="flex min-h-screen w-full flex-col items-center justify-between gap-y-2 bg-neutral-50 pb-2">
+		<main className="flex min-h-svh w-full flex-col items-center justify-between gap-y-2 bg-neutral-50 pb-2">
 			<h1 className="font-extrabold text-[3rem] tracking-tight">Sanamestari</h1>
 			<Instructions />
 			<Puzzle solution={solution.name} />

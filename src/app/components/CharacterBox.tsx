@@ -44,21 +44,25 @@ export default function CharacterBox({
 	}
 
 	return (
-		<input
-			id={`${attemptIndex}-${characterIndex}`}
-			name={`character-${attemptIndex}-${characterIndex}`}
-			autoComplete="off"
-			disabled={disabled}
-			type="text"
-			value={character}
-			ref={ref}
-			className={`flex h-12 w-12 items-center justify-center rounded-md border border-neutral-300 ${getStatusColorClass()} text-center font-bold text-2xl shadow-md md:h-24 md:w-24`}
-			maxLength={1}
-			minLength={1}
-			required
-			onChange={handleChange}
-			onKeyDown={handleKeyDown}
-			pattern="[a-öA-Ö]"
-		/>
+		<li className="list-none">
+			<input
+				id={`${attemptIndex}-${characterIndex}`}
+				name={`character-${attemptIndex}-${characterIndex}`}
+				aria-label={`Rivi ${attemptIndex + 1} kirjain ${characterIndex + 1}`}
+				autoComplete="off"
+				disabled={disabled}
+				type="text"
+				value={character}
+				ref={ref}
+				className={`flex h-12 w-12 items-center justify-center rounded-md border border-neutral-300 ${getStatusColorClass()} text-center font-bold text-2xl shadow-md md:h-24 md:w-24`}
+				maxLength={1}
+				minLength={1}
+				required
+				onChange={handleChange}
+				onKeyDown={handleKeyDown}
+				pattern="[A-Ö]"
+				size={1}
+			/>
+		</li>
 	);
 }
