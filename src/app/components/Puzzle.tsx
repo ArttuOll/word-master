@@ -71,6 +71,13 @@ export default function Puzzle({ solution }: { solution: string }) {
 					return attempt;
 				}) as Puzzle,
 		);
+
+		setAttemptIndex((prevIndex) => {
+			if (prevIndex < 5) {
+				return (prevIndex + 1) as AttemptIndex;
+			}
+			return prevIndex;
+		});
 	}
 
 	return (
