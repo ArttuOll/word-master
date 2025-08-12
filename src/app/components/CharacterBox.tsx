@@ -31,13 +31,16 @@ export default function CharacterBox({
 	}
 
 	function getStatusColorClass() {
-		if (color === "green") {
-			return "bg-green-500";
+		switch (color) {
+			case "green":
+				return "bg-green-500 text-neutral-900";
+			case "yellow":
+				return "bg-yellow-500 text-neutral-900";
+			case "gray":
+				return "bg-neutral-500 text-neutral-100";
+			default:
+				return "bg-white text-neutral-900";
 		}
-		if (color === "yellow") {
-			return "bg-yellow-500";
-		}
-		return "bg-white";
 	}
 
 	return (
@@ -49,7 +52,7 @@ export default function CharacterBox({
 			type="text"
 			value={character}
 			ref={ref}
-			className={`flex h-12 w-12 items-center justify-center rounded-md border border-neutral-300 ${getStatusColorClass()} text-center font-bold text-2xl text-neutral-900 shadow-md md:h-24 md:w-24`}
+			className={`flex h-12 w-12 items-center justify-center rounded-md border border-neutral-300 ${getStatusColorClass()} text-center font-bold text-2xl shadow-md md:h-24 md:w-24`}
 			maxLength={1}
 			minLength={1}
 			required

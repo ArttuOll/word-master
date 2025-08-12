@@ -5,7 +5,7 @@ import { isFinnishWord } from "~/app/actions/isFinnishWord";
 import AttemptRow from "~/app/components/AttemptRow";
 import Dialog from "~/app/components/Dialog";
 
-export type Color = "green" | "yellow" | "gray";
+export type Color = "green" | "yellow" | "gray" | "white";
 export type Attempt = { character: string; color: Color }[];
 export type Puzzle = [Attempt, Attempt, Attempt, Attempt, Attempt, Attempt];
 
@@ -36,7 +36,7 @@ export default function Puzzle({ solution }: { solution: string }) {
 
 	async function checkSolution(formData: FormData) {
 		setError("");
-		const result = ["gray", "gray", "gray", "gray", "gray"];
+		const result = ["white", "white", "white", "white", "white"];
 
 		const word = constructWord(formData);
 

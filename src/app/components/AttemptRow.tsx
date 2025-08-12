@@ -22,7 +22,7 @@ export default function AttemptRow({
 			if (currentAttempt.length < 5) {
 				currentAttempt = [
 					...currentAttempt,
-					{ character: newValue, color: "gray" },
+					{ character: newValue, color: "white" },
 				];
 
 				refs.current[index + 1]?.focus();
@@ -61,7 +61,7 @@ export default function AttemptRow({
 					characterIndex={0}
 					attemptIndex={index}
 					onKeyDown={onKeyDown(0)}
-					color={attempt[0]?.color ?? "gray"}
+					color={attempt[0]?.color ?? "white"}
 				/>
 				<CharacterBox
 					character={attempt?.[1]?.character ?? ""}
@@ -75,7 +75,7 @@ export default function AttemptRow({
 					characterIndex={1}
 					attemptIndex={index}
 					onKeyDown={onKeyDown(1)}
-					color={attempt[1]?.color ?? "gray"}
+					color={attempt[1]?.color ?? "white"}
 				/>
 				<CharacterBox
 					character={attempt?.[2]?.character ?? ""}
@@ -89,7 +89,7 @@ export default function AttemptRow({
 					characterIndex={2}
 					attemptIndex={index}
 					onKeyDown={onKeyDown(2)}
-					color={attempt[2]?.color ?? "gray"}
+					color={attempt[2]?.color ?? "white"}
 				/>
 				<CharacterBox
 					character={attempt?.[3]?.character ?? ""}
@@ -103,7 +103,7 @@ export default function AttemptRow({
 					characterIndex={3}
 					attemptIndex={index}
 					onKeyDown={onKeyDown(3)}
-					color={attempt[3]?.color ?? "gray"}
+					color={attempt[3]?.color ?? "white"}
 				/>
 				<CharacterBox
 					character={attempt?.[4]?.character ?? ""}
@@ -117,7 +117,7 @@ export default function AttemptRow({
 					characterIndex={4}
 					attemptIndex={index}
 					onKeyDown={onKeyDown(4)}
-					color={attempt[4]?.color ?? "gray"}
+					color={attempt[4]?.color ?? "white"}
 				/>
 			</ul>
 		</li>
