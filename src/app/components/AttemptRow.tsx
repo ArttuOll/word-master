@@ -16,30 +16,29 @@ export default function AttemptRow({
 	const refs = useRef<HTMLInputElement[]>([]);
 
 	const onChange = useCallback(
-		(index: number) => (newValue: string) => {
-			let currentAttempt = attempt;
+		(newValue: string, characterIndex: number) => {
+			console.log(newValue);
+			const currentAttempt = [...attempt];
 
-			if (currentAttempt.length < 5) {
-				currentAttempt = [
-					...currentAttempt,
-					{ character: newValue, color: "white" },
-				];
+			currentAttempt[characterIndex] = {
+				character: newValue,
+				color: "white",
+			};
 
-				refs.current[index + 1]?.focus();
-				updatePuzzle(currentAttempt);
-			}
+			refs.current[characterIndex + 1]?.focus();
+			updatePuzzle(currentAttempt);
 		},
 		[updatePuzzle, attempt],
 	);
 
 	const onKeyDown = useCallback(
-		(index: number) => (key: string) => {
-			let currentAttempt = attempt;
+		(key: string, characterIndex: number) => {
+			const currentAttempt = [...attempt];
 
-			if (currentAttempt.length > 0 && key === "Backspace") {
-				currentAttempt = currentAttempt.slice(0, -1);
+			if (key === "Backspace") {
+				currentAttempt[characterIndex] = { character: "", color: "white" };
 
-				refs.current[index - 1]?.focus();
+				refs.current[characterIndex - 1]?.focus();
 				updatePuzzle(currentAttempt);
 			}
 		},
@@ -56,11 +55,11 @@ export default function AttemptRow({
 							refs.current[0] = component;
 						}
 					}}
-					onChange={onChange(0)}
+					onChange={onChange}
 					disabled={disabled}
 					characterIndex={0}
 					attemptIndex={index}
-					onKeyDown={onKeyDown(0)}
+					onKeyDown={onKeyDown}
 					color={attempt[0]?.color ?? "white"}
 				/>
 				<CharacterBox
@@ -70,11 +69,11 @@ export default function AttemptRow({
 							refs.current[1] = component;
 						}
 					}}
-					onChange={onChange(1)}
+					onChange={onChange}
 					disabled={disabled}
 					characterIndex={1}
 					attemptIndex={index}
-					onKeyDown={onKeyDown(1)}
+					onKeyDown={onKeyDown}
 					color={attempt[1]?.color ?? "white"}
 				/>
 				<CharacterBox
@@ -84,11 +83,11 @@ export default function AttemptRow({
 							refs.current[2] = component;
 						}
 					}}
-					onChange={onChange(2)}
+					onChange={onChange}
 					disabled={disabled}
 					characterIndex={2}
 					attemptIndex={index}
-					onKeyDown={onKeyDown(2)}
+					onKeyDown={onKeyDown}
 					color={attempt[2]?.color ?? "white"}
 				/>
 				<CharacterBox
@@ -98,11 +97,11 @@ export default function AttemptRow({
 							refs.current[3] = component;
 						}
 					}}
-					onChange={onChange(3)}
+					onChange={onChange}
 					disabled={disabled}
 					characterIndex={3}
 					attemptIndex={index}
-					onKeyDown={onKeyDown(3)}
+					onKeyDown={onKeyDown}
 					color={attempt[3]?.color ?? "white"}
 				/>
 				<CharacterBox
@@ -112,11 +111,11 @@ export default function AttemptRow({
 							refs.current[4] = component;
 						}
 					}}
-					onChange={onChange(4)}
+					onChange={onChange}
 					disabled={disabled}
 					characterIndex={4}
 					attemptIndex={index}
-					onKeyDown={onKeyDown(4)}
+					onKeyDown={onKeyDown}
 					color={attempt[4]?.color ?? "white"}
 				/>
 			</ul>

@@ -13,21 +13,21 @@ export default function CharacterBox({
 }: {
 	character: string;
 	ref: Ref<HTMLInputElement>;
-	onChange: (newValue: string) => void;
+	onChange: (newValue: string, characterIndex: number) => void;
 	disabled: boolean;
 	attemptIndex: number;
 	characterIndex: number;
-	onKeyDown: (key: string) => void;
+	onKeyDown: (key: string, characterIndex: number) => void;
 	color: Color;
 }) {
 	function handleChange(event: ChangeEvent<HTMLInputElement>) {
 		if (event.target.value.length > 0) {
-			onChange(event.target.value.toUpperCase());
+			onChange(event.target.value.toUpperCase(), characterIndex);
 		}
 	}
 
 	function handleKeyDown(event: KeyboardEvent<HTMLInputElement>) {
-		onKeyDown(event.key);
+		onKeyDown(event.key, characterIndex);
 	}
 
 	function getStatusColorClass() {
