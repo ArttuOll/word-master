@@ -35,9 +35,15 @@ export default function AttemptRow({
 			const currentAttempt = [...attempt];
 
 			if (key === "Backspace") {
-				currentAttempt[characterIndex] = { character: "", color: "white" };
+				if (currentAttempt[characterIndex]?.character === "") {
+					refs.current[characterIndex - 1]?.focus();
+				} else {
+					currentAttempt[characterIndex] = {
+						character: "",
+						color: "white",
+					};
+				}
 
-				refs.current[characterIndex - 1]?.focus();
 				updatePuzzle(currentAttempt);
 			}
 		},
