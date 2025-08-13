@@ -45,41 +45,7 @@ export default function Puzzle({ solution }: { solution: string }) {
 			return;
 		}
 
-		const result = ["white", "white", "white", "white", "white"];
-
-		let checkWord = solution;
-		for (let i = 0; i < word.length; i++) {
-			const character = word[i]?.toLowerCase();
-
-			if (character == null) {
-				return;
-			}
-
-			if (character === solution[i]) {
-				result[i] = "green";
-				checkWord = `${checkWord.slice(0, i)} ${checkWord.slice(i + 1)}`;
-			}
-		}
-
-		for (let i = 0; i < word.length; i++) {
-			const character = word[i]?.toLowerCase();
-
-			if (character == null) {
-				return;
-			}
-
-			if (result[i] === "green") {
-				continue;
-			}
-
-			if (checkWord.includes(character)) {
-				const foundIndex = checkWord.indexOf(character);
-				result[i] = "yellow";
-				checkWord = `${checkWord.slice(0, foundIndex)} ${checkWord.slice(foundIndex + 1)}`;
-			} else {
-				result[i] = "gray";
-			}
-		}
+		const result = getColorsForWord(word, solution);
 
 		setPuzzle(
 			(prevPuzzle) =>
@@ -87,7 +53,7 @@ export default function Puzzle({ solution }: { solution: string }) {
 					if (index === attemptIndex) {
 						return attempt.map((char, charIndex) => ({
 							character: char.character,
-							color: result[charIndex],
+							color: result?.[charIndex],
 						}));
 					}
 
@@ -181,4 +147,46 @@ function constructWord(formData: FormData) {
 	});
 
 	return word;
+}
+
+function getColorsForWord(word: string, solution: string) {
+	const result = ["white", "white", "white", "white", "white"];
+
+	// On the first pass, we check exact matches and remove them from the characterPool
+	const characterPool = solution.split("");
+	for (let i = 0; i < word.length; i++) {
+		const character = word[i]?.toLowerCase();
+
+		if (character == null) {
+			return;
+		}
+
+		if (character === solution[i]) {
+			result[i] = "green";
+			characterPool[i] = "";
+		}
+	}
+
+	// On the second pass, we check for yellow and gray matches
+	for (let i = 0; i < word.length; i++) {
+		const character = word[i]?.toLowerCase();
+
+		if (character == null) {
+			return;
+		}
+
+		if (result[i] === "green") {
+			continue;
+		}
+
+		const foundIndex = characterPool.indexOf(character);
+		if (foundIndex !== -1) {
+			result[i] = "yellow";
+			characterPool[foundIndex] = "";
+		} else {
+			result[i] = "gray";
+		}
+	}
+
+	return result;
 }
