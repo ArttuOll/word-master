@@ -37,7 +37,6 @@ export default function Puzzle({ solution }: { solution: string }) {
 
 	async function checkSolution(formData: FormData) {
 		setError("");
-		const result = ["white", "white", "white", "white", "white"];
 
 		const word = constructWord(formData);
 
@@ -46,6 +45,9 @@ export default function Puzzle({ solution }: { solution: string }) {
 			return;
 		}
 
+		const result = ["white", "white", "white", "white", "white"];
+
+		let checkWord = solution;
 		for (let i = 0; i < word.length; i++) {
 			const character = word[i]?.toLowerCase();
 
@@ -55,8 +57,25 @@ export default function Puzzle({ solution }: { solution: string }) {
 
 			if (character === solution[i]) {
 				result[i] = "green";
-			} else if (solution.includes(character)) {
+				checkWord = `${checkWord.slice(0, i)} ${checkWord.slice(i + 1)}`;
+			}
+		}
+
+		for (let i = 0; i < word.length; i++) {
+			const character = word[i]?.toLowerCase();
+
+			if (character == null) {
+				return;
+			}
+
+			if (result[i] === "green") {
+				continue;
+			}
+
+			if (checkWord.includes(character)) {
+				const foundIndex = checkWord.indexOf(character);
 				result[i] = "yellow";
+				checkWord = `${checkWord.slice(0, foundIndex)} ${checkWord.slice(foundIndex + 1)}`;
 			} else {
 				result[i] = "gray";
 			}
