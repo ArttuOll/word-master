@@ -4,6 +4,7 @@ import { useCallback, useRef, useState } from "react";
 import { isFinnishWord } from "~/app/actions/isFinnishWord";
 import AttemptRow from "~/app/components/AttemptRow";
 import Dialog from "~/app/components/Dialog";
+import StatusIndicator from "~/app/components/StatusIndicator";
 import WordMasterButton from "~/app/components/WordMasterButton";
 
 export type Color = "green" | "yellow" | "gray" | "white";
@@ -81,11 +82,7 @@ export default function Puzzle({ solution }: { solution: string }) {
 			className="flex w-full flex-col items-center gap-y-2"
 			action={checkSolution}
 		>
-			{error && (
-				<p aria-live="polite" className="text-red-700">
-					{error}
-				</p>
-			)}
+			<StatusIndicator error={error} />
 			<div className="grid w-full grid-cols-[1fr_min-content_1fr] items-center justify-items-center gap-y-4">
 				<ul className="col-2 flex list-none flex-col gap-2">
 					<AttemptRow
