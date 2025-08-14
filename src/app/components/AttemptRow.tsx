@@ -1,4 +1,4 @@
-import { useCallback, useRef } from "react";
+import { useRef } from "react";
 import CharacterBox from "~/app/components/CharacterBox";
 import type { Attempt } from "~/app/components/Puzzle";
 
@@ -15,40 +15,34 @@ export default function AttemptRow({
 }) {
 	const refs = useRef<HTMLInputElement[]>([]);
 
-	const onChange = useCallback(
-		(newValue: string, characterIndex: number) => {
-			const currentAttempt = [...attempt];
+	const onChange = (newValue: string, characterIndex: number) => {
+		const currentAttempt = [...attempt];
 
-			currentAttempt[characterIndex] = {
-				character: newValue,
-				color: "white",
-			};
+		currentAttempt[characterIndex] = {
+			character: newValue,
+			color: "white",
+		};
 
-			refs.current[characterIndex + 1]?.focus();
-			updatePuzzle(currentAttempt);
-		},
-		[updatePuzzle, attempt],
-	);
+		refs.current[characterIndex + 1]?.focus();
+		updatePuzzle(currentAttempt);
+	};
 
-	const onKeyDown = useCallback(
-		(key: string, characterIndex: number) => {
-			const currentAttempt = [...attempt];
+	const onKeyDown = (key: string, characterIndex: number) => {
+		const currentAttempt = [...attempt];
 
-			if (key === "Backspace") {
-				if (currentAttempt[characterIndex]?.character === "") {
-					refs.current[characterIndex - 1]?.focus();
-				} else {
-					currentAttempt[characterIndex] = {
-						character: "",
-						color: "white",
-					};
-				}
-
-				updatePuzzle(currentAttempt);
+		if (key === "Backspace") {
+			if (currentAttempt[characterIndex]?.character === "") {
+				refs.current[characterIndex - 1]?.focus();
+			} else {
+				currentAttempt[characterIndex] = {
+					character: "",
+					color: "white",
+				};
 			}
-		},
-		[updatePuzzle, attempt],
-	);
+
+			updatePuzzle(currentAttempt);
+		}
+	};
 
 	return (
 		<li className="list-none">

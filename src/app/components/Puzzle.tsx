@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { isFinnishWord } from "~/app/actions/isFinnishWord";
 import AttemptRow from "~/app/components/AttemptRow";
 import Dialog from "~/app/components/Dialog";
@@ -20,21 +20,18 @@ export default function Puzzle({ solution }: { solution: string }) {
 
 	const successDialogRef = useRef<HTMLDialogElement>(null);
 
-	const updatePuzzle = useCallback(
-		(newAttempt: Attempt) => {
-			setPuzzle(
-				(prevPuzzle) =>
-					prevPuzzle.map((attempt, index) => {
-						if (index === attemptIndex) {
-							return [...newAttempt];
-						}
+	const updatePuzzle = (newAttempt: Attempt) => {
+		setPuzzle(
+			(prevPuzzle) =>
+				prevPuzzle.map((attempt, index) => {
+					if (index === attemptIndex) {
+						return [...newAttempt];
+					}
 
-						return attempt;
-					}) as Puzzle,
-			);
-		},
-		[attemptIndex],
-	);
+					return attempt;
+				}) as Puzzle,
+		);
+	};
 
 	async function checkSolution(formData: FormData) {
 		setError("");
