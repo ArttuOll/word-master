@@ -1,3 +1,4 @@
+import { connection } from "next/server";
 import Instructions from "~/app/components/Instructions";
 import Puzzle from "~/app/components/Puzzle";
 import { db } from "~/server/db";
@@ -8,6 +9,8 @@ export default async function HomePage() {
 		take: 1,
 		skip: Math.floor(Math.random() * wordCount),
 	});
+
+	await connection();
 
 	return (
 		<main className="flex min-h-svh w-full flex-col items-center justify-between gap-y-2 bg-neutral-50 pb-2">
