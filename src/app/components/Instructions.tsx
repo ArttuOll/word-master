@@ -29,7 +29,7 @@ export default function Instructions() {
 					</svg>
 					Ohjeet
 				</summary>
-				<ul className="list-disc px-2">
+				<ul className="flex list-disc flex-col gap-1 px-2">
 					<li>Kirjoita sana riville ja paina tarkista.</li>
 					<li>
 						<span className="mr-1 rounded bg-neutral-500 p-0.25 px-1 text-white">
