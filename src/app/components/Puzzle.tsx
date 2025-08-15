@@ -6,14 +6,28 @@ import AttemptRow from "~/app/components/AttemptRow";
 import Dialog from "~/app/components/Dialog";
 import StatusIndicator from "~/app/components/StatusIndicator";
 import WordMasterButton from "~/app/components/WordMasterButton";
+import { useLocalStorage } from "~/app/useLocalStorage";
 
 export type Color = "green" | "yellow" | "gray" | "white";
 export type Attempt = { character: string; color: Color }[];
 export type Puzzle = [Attempt, Attempt, Attempt, Attempt, Attempt, Attempt];
 
 export default function Puzzle({ solution }: { solution: string }) {
-	const [puzzle, setPuzzle] = useState<Puzzle>([[], [], [], [], [], []]);
-	const [attemptIndex, setAttemptIndex] = useState<number>(0);
+	const [puzzle, setPuzzle] = useLocalStorage<Puzzle>("puzzle", [
+		[],
+		[],
+		[],
+		[],
+		[],
+		[],
+	]);
+
+	const [attemptIndex, setAttemptIndex] = useLocalStorage<number>(
+		"attemptIndex",
+		0,
+	);
+
+	const [storedSolution] = useLocalStorage("solution", solution);
 
 	const [error, setError] = useState("");
 	const [success, setSuccess] = useState(false);
@@ -43,7 +57,7 @@ export default function Puzzle({ solution }: { solution: string }) {
 			return;
 		}
 
-		const result = getColorsForWord(word, solution);
+		const result = getColorsForWord(word, storedSolution);
 
 		setPuzzle(
 			(prevPuzzle) =>
@@ -59,7 +73,7 @@ export default function Puzzle({ solution }: { solution: string }) {
 				}) as Puzzle,
 		);
 
-		if (word === solution) {
+		if (word === storedSolution) {
 			setSuccess(true);
 			successDialogRef.current?.showModal();
 			return;
@@ -126,7 +140,7 @@ export default function Puzzle({ solution }: { solution: string }) {
 			<Dialog ref={successDialogRef}>
 				{success
 					? "Onneksi olkoon! Voitit pelin!"
-					: `Hävisit pelin. Oikea sana oli "${solution}".`}
+					: `Hävisit pelin. Oikea sana oli "${storedSolution}".`}
 			</Dialog>
 		</form>
 	);

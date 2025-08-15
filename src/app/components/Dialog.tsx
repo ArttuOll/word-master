@@ -8,6 +8,11 @@ export default function Dialog({
 	ref: Ref<HTMLDialogElement>;
 	children?: string;
 }) {
+	function onPlayAgain() {
+		window.localStorage.clear();
+		window.location.reload();
+	}
+
 	return (
 		<dialog
 			ref={ref}
@@ -16,11 +21,7 @@ export default function Dialog({
 			<div className="flex flex-col items-center justify-items-center gap-4 ">
 				<p className="text-xl">{children}</p>
 				<div className="flex w-full justify-center gap-4">
-					<WordMasterButton
-						type="button"
-						autoFocus
-						onClick={() => window.location.reload()}
-					>
+					<WordMasterButton type="button" autoFocus onClick={onPlayAgain}>
 						Pelaa uudelleen
 					</WordMasterButton>
 				</div>
