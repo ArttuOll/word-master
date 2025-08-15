@@ -5,6 +5,7 @@ import { isFinnishWord } from "~/app/actions/isFinnishWord";
 import AttemptRow from "~/app/components/AttemptRow";
 import Dialog from "~/app/components/Dialog";
 import StatusIndicator from "~/app/components/StatusIndicator";
+import { useTimer } from "~/app/components/useTimer";
 import WordMasterButton from "~/app/components/WordMasterButton";
 import { useLocalStorage } from "~/app/useLocalStorage";
 
@@ -31,6 +32,8 @@ export default function Puzzle({ solution }: { solution: string }) {
 
 	const [error, setError] = useState("");
 	const [success, setSuccess] = useState(false);
+
+	const [seconds, minutes] = useTimer(success || attemptIndex === 6);
 
 	const successDialogRef = useRef<HTMLDialogElement>(null);
 
@@ -89,60 +92,65 @@ export default function Puzzle({ solution }: { solution: string }) {
 	const submitButtonDisabled = success || attemptIndex === 6;
 
 	return (
-		<form
-			className="flex w-full flex-col items-center gap-y-2"
-			action={checkSolution}
-		>
-			<StatusIndicator error={error} />
-			<div className="grid w-full grid-cols-[1fr_min-content_1fr] items-center justify-items-center gap-y-4">
-				<ul className="col-2 flex list-none flex-col gap-2">
-					<AttemptRow
-						attempt={puzzle[0]}
-						updatePuzzle={updatePuzzle}
-						disabled={attemptIndex !== 0}
-						index={0}
-					/>
-					<AttemptRow
-						attempt={puzzle[1]}
-						updatePuzzle={updatePuzzle}
-						disabled={attemptIndex !== 1}
-						index={1}
-					/>
-					<AttemptRow
-						attempt={puzzle[2]}
-						updatePuzzle={updatePuzzle}
-						disabled={attemptIndex !== 2}
-						index={2}
-					/>
-					<AttemptRow
-						attempt={puzzle[3]}
-						updatePuzzle={updatePuzzle}
-						disabled={attemptIndex !== 3}
-						index={3}
-					/>
-					<AttemptRow
-						attempt={puzzle[4]}
-						updatePuzzle={updatePuzzle}
-						disabled={attemptIndex !== 4}
-						index={4}
-					/>
-					<AttemptRow
-						attempt={puzzle[5]}
-						updatePuzzle={updatePuzzle}
-						disabled={attemptIndex !== 5}
-						index={5}
-					/>
-				</ul>
-				<WordMasterButton type="submit" disabled={submitButtonDisabled}>
-					Tarkista
-				</WordMasterButton>
-			</div>
-			<Dialog ref={successDialogRef}>
-				{success
-					? "Onneksi olkoon! Voitit pelin!"
-					: `Hävisit pelin. Oikea sana oli "${storedSolution}".`}
-			</Dialog>
-		</form>
+		<>
+			<p>
+				{minutes} {seconds}
+			</p>
+			<form
+				className="flex w-full flex-col items-center gap-y-2"
+				action={checkSolution}
+			>
+				<StatusIndicator error={error} />
+				<div className="grid w-full grid-cols-[1fr_min-content_1fr] items-center justify-items-center gap-y-4">
+					<ul className="col-2 flex list-none flex-col gap-2">
+						<AttemptRow
+							attempt={puzzle[0]}
+							updatePuzzle={updatePuzzle}
+							disabled={attemptIndex !== 0}
+							index={0}
+						/>
+						<AttemptRow
+							attempt={puzzle[1]}
+							updatePuzzle={updatePuzzle}
+							disabled={attemptIndex !== 1}
+							index={1}
+						/>
+						<AttemptRow
+							attempt={puzzle[2]}
+							updatePuzzle={updatePuzzle}
+							disabled={attemptIndex !== 2}
+							index={2}
+						/>
+						<AttemptRow
+							attempt={puzzle[3]}
+							updatePuzzle={updatePuzzle}
+							disabled={attemptIndex !== 3}
+							index={3}
+						/>
+						<AttemptRow
+							attempt={puzzle[4]}
+							updatePuzzle={updatePuzzle}
+							disabled={attemptIndex !== 4}
+							index={4}
+						/>
+						<AttemptRow
+							attempt={puzzle[5]}
+							updatePuzzle={updatePuzzle}
+							disabled={attemptIndex !== 5}
+							index={5}
+						/>
+					</ul>
+					<WordMasterButton type="submit" disabled={submitButtonDisabled}>
+						Tarkista
+					</WordMasterButton>
+				</div>
+				<Dialog ref={successDialogRef}>
+					{success
+						? `Onneksi olkoon! Voitit pelin ajassa ${minutes} ${seconds} yrityksellä ${attemptIndex + 1}!`
+						: `Hävisit pelin. Oikea sana oli "${storedSolution}".`}
+				</Dialog>
+			</form>
+		</>
 	);
 }
 
